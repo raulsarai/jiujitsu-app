@@ -7,12 +7,13 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation';
 import { Ionicons } from '@expo/vector-icons';
 import { DetailRow } from '../components/DetailRow';
+import { UserData } from '../types/user';
 
 
-const userData = {
+const userData: UserData = {
   name: 'Raul Mauro Sarai de Jesus',
   email: 'raulmauro.sj@gmail.com',
-  profileType: 'Adulto',
+  profileType: "Adulto",
   belt: 'Branca - Iniciante',
   whatsapp: '11992391170',
   birthDate: '1 de novembro de 1991',
@@ -138,7 +139,7 @@ export function ProfileScreen({ navigation }: ProfileScreenProps) {
         <UserInfo>
           <UserName>{userData.name}</UserName>
           <UserEmail>{userData.email}</UserEmail>
-          <EditButton>
+          <EditButton onPress={() => navigation.navigate('EditProfile', { user: userData })}>
             <EditText>Editar</EditText>
           </EditButton>
         </UserInfo>

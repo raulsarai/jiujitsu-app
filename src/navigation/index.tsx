@@ -12,11 +12,14 @@ import { HomeScreen } from '../screens/HomeScreen';
 import { EvolutionScreen } from '../screens/EvolutionScreen';
 import { ScheduleScreen } from '../screens/ScheduleScreen';
 import { ProfileScreen } from '../screens/ProfileScreen'; 
+import { EditProfileScreen } from '../screens/EditProfileScreen';
+import { UserData } from '../types/user';
 
 export type RootStackParamList = {
   Login: undefined;
   MainTabs: undefined;
   Profile: undefined;
+  EditProfile: { user: UserData };
 };
 
 
@@ -74,6 +77,15 @@ export function AppNavigator() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="MainTabs" component={MainTabNavigator} />
         <Stack.Screen name="Profile" component={ProfileScreen} /> 
+        <Stack.Screen 
+          name="EditProfile" 
+          component={EditProfileScreen}
+          options={{ 
+            presentation: 'transparentModal' ,
+            animation: 'slide_from_bottom',
+          }} 
+          
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
