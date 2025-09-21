@@ -1,4 +1,4 @@
-// path: src/components/Button.tsx
+
 
 import React from 'react';
 import { TouchableOpacityProps, ImageSourcePropType } from 'react-native';

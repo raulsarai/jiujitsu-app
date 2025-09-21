@@ -1,4 +1,4 @@
-// path: src/components/StatCard.tsx
+
 
 import React from 'react';
 import { DefaultTheme, useTheme } from 'styled-components';
@@ -25,7 +25,7 @@ const CountText = styled.Text(({ theme } : { theme: DefaultTheme }) => ({
 
 const LabelText = styled.Text(({ theme, color }: { theme: DefaultTheme } & StatCardProps) => ({
   color: color || theme.colors.subtext,
-  fontSize: theme.fonts.sizes.medium,
+  fontSize: theme.fonts.sizes.xsmall,
   width: '100%',
   textAlign: 'center',
 }));
