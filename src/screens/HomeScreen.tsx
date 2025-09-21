@@ -116,7 +116,7 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
             <NameLabel>Nome</NameLabel>
             <NameText>{userData.name}</NameText>
           </NameContainer>
-          <TouchableOpacity style={{ marginLeft: 'auto',  }} onPress={() => { /* Navegar para a tela de perfil */ }}>
+          <TouchableOpacity style={{ marginLeft: 'auto',  }} onPress={() => navigation.navigate('Profile')}>
           <Ionicons name="person-circle-outline"  size={28} color="red" />
         </TouchableOpacity>
         </ProfileContainer>

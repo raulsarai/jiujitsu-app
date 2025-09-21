@@ -11,10 +11,12 @@ import { LoginScreen } from '../screens/LoginScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { EvolutionScreen } from '../screens/EvolutionScreen';
 import { ScheduleScreen } from '../screens/ScheduleScreen';
+import { ProfileScreen } from '../screens/ProfileScreen'; 
 
 export type RootStackParamList = {
   Login: undefined;
   MainTabs: undefined;
+  Profile: undefined;
 };
 
 
@@ -36,9 +38,8 @@ function MainTabNavigator() {
         tabBarActiveTintColor: theme.colors.primary,
         tabBarInactiveTintColor: theme.colors.subtext,
         tabBarStyle: {
-          // A CORREÇÃO ESTÁ AQUI:
-          backgroundColor: theme.colors.surfaceAlternate, // Usamos a nova cor
-          borderTopColor: theme.colors.surfaceAlternate, // Removemos a linha superior
+          backgroundColor: theme.colors.surfaceAlternate, 
+          borderTopColor: theme.colors.surfaceAlternate, 
         },
         tabBarIcon: ({ color, size, focused }) => {
           let iconName;
@@ -72,6 +73,7 @@ export function AppNavigator() {
       >
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="MainTabs" component={MainTabNavigator} />
+        <Stack.Screen name="Profile" component={ProfileScreen} /> 
       </Stack.Navigator>
     </NavigationContainer>
   );
