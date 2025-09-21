@@ -73,11 +73,10 @@ const handleEmailChange = (text: string) => {
   const handleContinue = () => {
     if (!email.includes('@') || email.length < 5) {
       setError('Por favor, insira um e-mail válido.');
-      return; 
+      return;
     }
-
     setError(null);
-    navigation.navigate('MainTabs');
+    navigation.navigate('PinVerification', { email: email });
   };
 
   return (

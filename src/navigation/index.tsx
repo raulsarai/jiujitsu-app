@@ -13,13 +13,21 @@ import { EvolutionScreen } from '../screens/EvolutionScreen';
 import { ScheduleScreen } from '../screens/ScheduleScreen';
 import { ProfileScreen } from '../screens/ProfileScreen'; 
 import { EditProfileScreen } from '../screens/EditProfileScreen';
+import { PinVerificationScreen } from '../screens/PinVerificationScreen';
+import { SearchEmailScreen } from '../screens/SearchEmailScreen';
+import { ContactITScreen } from '../screens/ContactITScreen';
 import { UserData } from '../types/user';
+import { SpamVerificationScreen } from '../screens/SpamVerificationScreen';
 
 export type RootStackParamList = {
   Login: undefined;
   MainTabs: undefined;
   Profile: undefined;
   EditProfile: { user: UserData };
+  PinVerification: { email: string };
+  SpamVerification: { email: string };
+  SearchEmail: { email: string };
+  ContactIT: { email: string };
 };
 
 
@@ -75,6 +83,7 @@ export function AppNavigator() {
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="PinVerification" component={PinVerificationScreen} />
         <Stack.Screen name="MainTabs" component={MainTabNavigator} />
         <Stack.Screen name="Profile" component={ProfileScreen} /> 
         <Stack.Screen 
@@ -85,6 +94,30 @@ export function AppNavigator() {
             animation: 'slide_from_bottom',
           }} 
           
+        />
+        <Stack.Screen
+          name="SpamVerification"
+          component={SpamVerificationScreen}
+          options={{
+            presentation: 'transparentModal',
+            animation: 'fade',
+          }}
+        />
+        <Stack.Screen
+          name="SearchEmail"
+          component={SearchEmailScreen}
+          options={{
+            presentation: 'transparentModal',
+            animation: 'fade',
+          }}
+        />
+        <Stack.Screen
+          name="ContactIT"
+          component={ContactITScreen}
+          options={{
+            presentation: 'transparentModal',
+            animation: 'fade',
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
