@@ -21,10 +21,19 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.manatech.jiujitsuapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d14a8515-a7a3-49aa-a503-fc6870acca5c"
+      }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }
