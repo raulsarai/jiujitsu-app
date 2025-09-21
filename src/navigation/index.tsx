@@ -19,6 +19,8 @@ import { ContactITScreen } from '../screens/ContactITScreen';
 import { UserData } from '../types/user';
 import { SpamVerificationScreen } from '../screens/SpamVerificationScreen';
 import { RegistrationScreen } from '../screens/RegistrationScreen';
+import { ScheduleItem } from '../types/schedule';
+import { CheckInModal } from '../screens/CheckInModal';
 
 
 export type RootStackParamList = {
@@ -31,6 +33,7 @@ export type RootStackParamList = {
   SpamVerification: { email: string };
   SearchEmail: { email: string };
   ContactIT: { email: string };
+  CheckInModal: { scheduleItem: ScheduleItem };
 };
 
 
@@ -95,7 +98,11 @@ export function AppNavigator() {
         />
         <Stack.Screen name="PinVerification" component={PinVerificationScreen} />
         <Stack.Screen name="MainTabs" component={MainTabNavigator} />
-        <Stack.Screen name="Profile" component={ProfileScreen} /> 
+        <Stack.Screen name="Profile" component={ProfileScreen} 
+        options={{ 
+            presentation: 'transparentModal' ,
+            animation: 'slide_from_bottom',
+          }}  /> 
         <Stack.Screen 
           name="EditProfile" 
           component={EditProfileScreen}
@@ -128,6 +135,11 @@ export function AppNavigator() {
             presentation: 'transparentModal',
             animation: 'fade',
           }}
+        />
+        <Stack.Screen
+          name="CheckInModal"
+          component={CheckInModal}
+          options={{ presentation: 'transparentModal', animation: 'slide_from_bottom' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

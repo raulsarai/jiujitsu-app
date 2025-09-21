@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+
 import { SafeAreaView, ScrollView, TouchableOpacity, Text, Platform, View } from 'react-native';
 import styled, { DefaultTheme } from 'styled-components/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -8,6 +8,8 @@ import { StyledTextInput } from '../components/StyledTextInput';
 import { Button } from '../components/Button';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { PickerInput } from '../components/PickerInput';
+import { MaskedTextInput } from 'react-native-mask-text';
+import { useEffect, useState } from 'react';
 
 const beltOptions = [
   { label: 'Selecione uma Faixa', value: '' },
@@ -31,6 +33,8 @@ const Container = styled(SafeAreaView)(({ theme }: { theme: DefaultTheme }) => (
   flex: 1,
   backgroundColor: theme.colors.background,
   paddingTop: theme.spacings.xxlarge,
+  paddingBottom: theme.spacings.xlarge,
+  
 }));
 
 const Header = styled.View(({ theme }: { theme: DefaultTheme }) => ({
@@ -57,7 +61,18 @@ const FieldGroup = styled.View(({ theme }: { theme: DefaultTheme }) => ({
 const Label = styled.Text(({ theme }: { theme: DefaultTheme }) => ({
   color: theme.colors.text,
   marginBottom: theme.spacings.small,
+  fontSize: theme.fonts.sizes.xsmall,
+}));
+
+const StyledMaskedInput = styled(MaskedTextInput)(({ theme }: { theme: DefaultTheme }) => ({
+  backgroundColor: theme.colors.surface,
+  color: theme.colors.text,
+  borderRadius: theme.borders.radius,
+  borderWidth: 1,
+  borderColor: theme.colors.border,
+  padding: theme.spacings.medium,
   fontSize: theme.fonts.sizes.medium,
+  width: '100%',
 }));
 
 type RegistrationScreenProps = NativeStackScreenProps<RootStackParamList, 'Registration'>;
@@ -65,6 +80,7 @@ type RegistrationScreenProps = NativeStackScreenProps<RootStackParamList, 'Regis
 export function RegistrationScreen({ navigation }: RegistrationScreenProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [birthDate, setBirthDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [isMinor, setIsMinor] = useState(false);
@@ -90,7 +106,7 @@ export function RegistrationScreen({ navigation }: RegistrationScreenProps) {
   };
 
   const handleRegister = () => {
-    console.log({ name, email, birthDate, isMinor, guardianName, belt, degree });
+    console.log({ name, email, phone, birthDate, isMinor, guardianName, belt, degree });
     navigation.navigate('MainTabs');
   };
 
@@ -112,6 +128,16 @@ export function RegistrationScreen({ navigation }: RegistrationScreenProps) {
           <FieldGroup>
             <Label>E-mail</Label>
             <StyledTextInput value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" />
+          </FieldGroup>
+
+          <FieldGroup>
+            <Label>WhatsApp</Label>
+            <StyledMaskedInput
+              mask="(99) 99999-9999"
+              value={phone}
+              onChangeText={setPhone}
+              keyboardType="phone-pad"
+            />
           </FieldGroup>
           
           <FieldGroup>
@@ -142,9 +168,14 @@ export function RegistrationScreen({ navigation }: RegistrationScreenProps) {
             <PickerInput items={degreeOptions} selectedValue={degree} onValueChange={(itemValue) => setDegree(itemValue as number)} />
           </FieldGroup>
 
-          <Button variant="primary" onPress={handleRegister}>Cadastrar</Button>
+          
         </Form>
-      </ScrollView>
+        
+    </ScrollView>
+    <View style={{ margin: 16 }}>
+    <Button variant="primary" onPress={handleRegister} >Cadastrar</Button>
+    </View>
+
     </Container>
   );
 }

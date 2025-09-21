@@ -53,11 +53,12 @@ interface TimeSlotCardProps {
   time: string;
   type: string;
   status: Status;
+  onPress?: () => void;
 }
 
-export function TimeSlotCard({ time, type, status }: TimeSlotCardProps) {
+export function TimeSlotCard({  time, type, status, onPress }: TimeSlotCardProps) {
   return (
-    <CardContainer>
+     <CardContainer onPress={onPress}>
       <IconContainer>
         <Ionicons name="calendar-outline" size={24} color="#D32F2F" />
       </IconContainer>

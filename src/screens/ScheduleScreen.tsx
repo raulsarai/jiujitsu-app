@@ -5,6 +5,10 @@ import { SafeAreaView, ScrollView } from 'react-native';
 import styled, { DefaultTheme } from 'styled-components/native';
 import { DayChip } from '../components/DayChip';
 import { TimeSlotCard } from '../components/TimeSlotCard';
+import { CompositeScreenProps } from '@react-navigation/native';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList, TabParamList } from '../navigation';
 
 const weekDays = ['Sábado', 'Domingo', 'Segunda', 'Terça', 'Quarta'];
 type ScheduleStatus = 'available' | 'checked-in';
@@ -17,9 +21,13 @@ interface ScheduleItem {
   status: ScheduleStatus;
 }
 
+type ScheduleScreenProps = CompositeScreenProps<
+  BottomTabScreenProps<TabParamList, 'Schedule'>,
+  NativeStackScreenProps<RootStackParamList>
+>;
+
 const scheduleData: ScheduleItem[] = [
   { id: '1', day: 'Sábado', time: '14h → 15h', type: 'Infantil', status: 'available' },
-  { id: '2', day: 'Sábado', time: '15h → 16:30', type: 'Adulto', status: 'available' },
   { id: '3', day: 'Sábado', time: '15h → 16:30', type: 'Adulto', status: 'checked-in' },
   { id: '4', day: 'Segunda', time: '19h → 20:30', type: 'Adulto', status: 'available' },
   { id: '5', day: 'Terça', time: '20h → 21:30', type: 'Adulto', status: 'available' },
@@ -55,11 +63,15 @@ const SectionTitle = styled.Text(({ theme }: { theme: DefaultTheme }) => ({
   marginBottom: theme.spacings.medium,
 }));
 
-// --- Tela Principal ---
-export function ScheduleScreen() {
+export function ScheduleScreen({ navigation }: ScheduleScreenProps) {
   const [selectedDay, setSelectedDay] = useState('Sábado');
 
   const filteredSchedule = scheduleData.filter(item => item.day === selectedDay);
+
+
+  const handleTimeSlotPress = (item: ScheduleItem) => {
+    navigation.navigate('CheckInModal', { scheduleItem: item });
+  };
 
   return (
     <Container>
@@ -81,7 +93,7 @@ export function ScheduleScreen() {
           </ScrollView>
         </Section>
         
-        <Section>
+       <Section>
           <SectionTitle>Selecione o horário</SectionTitle>
           {filteredSchedule.map(item => (
             <TimeSlotCard
@@ -89,6 +101,7 @@ export function ScheduleScreen() {
               time={item.time}
               type={item.type}
               status={item.status}
+              onPress={() => handleTimeSlotPress(item)}
             />
           ))}
         </Section>
