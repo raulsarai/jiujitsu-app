@@ -18,9 +18,12 @@ import { SearchEmailScreen } from '../screens/SearchEmailScreen';
 import { ContactITScreen } from '../screens/ContactITScreen';
 import { UserData } from '../types/user';
 import { SpamVerificationScreen } from '../screens/SpamVerificationScreen';
+import { RegistrationScreen } from '../screens/RegistrationScreen';
+
 
 export type RootStackParamList = {
   Login: undefined;
+  Registration: undefined;
   MainTabs: undefined;
   Profile: undefined;
   EditProfile: { user: UserData };
@@ -83,6 +86,13 @@ export function AppNavigator() {
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Registration" 
+        component={RegistrationScreen} 
+        options={{ 
+            presentation: 'transparentModal' ,
+            animation: 'slide_from_bottom',
+          }} 
+        />
         <Stack.Screen name="PinVerification" component={PinVerificationScreen} />
         <Stack.Screen name="MainTabs" component={MainTabNavigator} />
         <Stack.Screen name="Profile" component={ProfileScreen} /> 

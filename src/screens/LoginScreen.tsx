@@ -79,6 +79,17 @@ const handleEmailChange = (text: string) => {
     navigation.navigate('PinVerification', { email: email });
   };
 
+  const RegistrationLink = styled.TouchableOpacity(({ theme }: { theme: DefaultTheme }) => ({
+  marginTop: theme.spacings.large,
+  width: '100%',
+}));
+
+const RegistrationLinkText = styled.Text(({ theme }: { theme: DefaultTheme }) => ({
+  color: theme.colors.text,
+    width: '100%',
+    alignItems: 'center',
+}));
+
   return (
     <Background source={require('../assets/images/bg_loginscreen.webp')}>
       <StatusBar barStyle="light-content" />
@@ -101,6 +112,9 @@ const handleEmailChange = (text: string) => {
           {error && <ErrorMessage>{error}</ErrorMessage>}
         <Spacer />
         <Button variant="primary" onPress={handleContinue}>Continuar</Button>
+         <RegistrationLink onPress={() => navigation.navigate('Registration')}>
+            <RegistrationLinkText>Não tem uma conta? Cadastre-se</RegistrationLinkText>
+          </RegistrationLink>
         
         <Subtitle>______________________________________</Subtitle>
         <Button
@@ -109,6 +123,8 @@ const handleEmailChange = (text: string) => {
         >
           Continuar com o Google    
         </Button>
+
+       
       </Container>
     </Background>
   );
